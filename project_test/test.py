@@ -1,16 +1,33 @@
-# macでの初めてのコーディング
-# まずは簡単なコードから書いていこう
+class Note:
+    def __init__(self, content):
+        self.content = content
 
-class Car:
-    def __init__(self, color, speed):
-        self.color = color
-        self.speed = speed
+class Notebook:
+    def __init__(self):
+        self.notes = []  # Noteのリスト
 
-    def drive(self):
-        print(f"{self.color}の車が時速{self.speed}kmで走ります！")
+    def add_note(self, content):
+        note = Note(content)
+        self.notes.append(note)
 
-my_car = Car("赤", 120)
-your_car = Car("青", 100)
+    def show_notes(self):
+        if not self.notes:
+            print("メモはありません。")
+            return
+        for i, note in enumerate(self.notes):
+            print(f"{i}: {note.content}")
 
-my_car.drive()   # 赤の車が時速120kmで走ります！
-your_car.drive() # 青の車が時速100kmで走ります！
+    def delete_note(self, index):
+        if index < 0 or index >= len(self.notes):
+            print("無効なインデックスです。")
+            return
+        del self.notes[index]
+        print(f"メモ {index} を削除しました。")
+
+buylist = Notebook()
+buylist.add_note("牛乳")
+buylist.add_note("卵")
+buylist.add_note("パン")
+buylist.show_notes()
+buylist.delete_note(1)
+buylist.show_notes()
